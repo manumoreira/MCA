@@ -4,29 +4,31 @@ import matplotlib
 from matplotlib import pyplot as plt
 
 def calculate_stats(numbers):
-    mean = np.mean(numbers)
-    median = np.median(numbers)
-    return mean, median
+    media = np.mean(numbers)
+    mediana = np.median(numbers)
+    return media, mediana
 
 def plot_histogram(numbers):
-    plt.hist(numbers, bins=10, alpha=0.5)
-    plt.xlabel('Value')
-    plt.ylabel('Frequency')
-    plt.title('Histogram')
-    st.pyplot()
+    fig, ax = plt.subplots()
+    ax.hist(numbers, bins=10, alpha=0.5)
+    ax.set_xlabel('Valor')
+    ax.set_ylabel('Frequencia')
+    ax.set_title('Histograma')
+    st.pyplot(fig)
 
 def plot_bar_chart(numbers):
+    fig, ax = plt.subplots()
     unique, counts = np.unique(numbers, return_counts=True)
     plt.bar(unique, counts)
     plt.xlabel('Value')
     plt.ylabel('Count')
     plt.title('Bar Chart')
-    st.pyplot()
+    st.pyplot(fig)
 
 def main():
-    st.title('Simple Stats Tool')
+    st.title('Clase 2 - Medidas de tendencia central')
 
-    numbers_input = st.text_area("Enter numbers separated by spaces or commas")
+    numbers_input = st.text_area("Ingrese los números separados por comas o espacios")
 
     numbers = []
     for num in numbers_input.split():
