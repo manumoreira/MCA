@@ -28,7 +28,7 @@ def plot_bar_chart(numbers):
 def main():
     st.title('Clase 2 - Medidas de tendencia central')
 
-    numbers_input = st.text_area("Ingrese los números separados por comas o espacios")
+    numbers_input = st.text_area("Ingrese los números separados por espacios")
 
     numbers = []
     for num in numbers_input.split():
@@ -38,9 +38,9 @@ def main():
             pass
 
     if numbers:
-        mean, median = calculate_stats(numbers)
-        st.write(f"Mean: {mean}")
-        st.write(f"Median: {median}")
+        media, mediana = calculate_stats(numbers)
+        st.write(f"Media: {media}")
+        st.write(f"Mediana: {mediana}")
         
         plot_histogram(numbers)
         plot_bar_chart(numbers)
