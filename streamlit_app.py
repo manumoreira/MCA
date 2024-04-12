@@ -1,5 +1,7 @@
+import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+from matplotlib import pyplot as plt
 
 def calculate_stats(numbers):
     mean = np.mean(numbers)
@@ -8,34 +10,35 @@ def calculate_stats(numbers):
 
 def plot_histogram(numbers):
     plt.hist(numbers, bins=10, alpha=0.5)
-    plt.xlabel('Valor')
-    plt.ylabel('Frequencia')
-    plt.title('Histograma')
-    plt.show()
+    plt.xlabel('Value')
+    plt.ylabel('Frequency')
+    plt.title('Histogram')
+    st.pyplot()
 
 def plot_bar_chart(numbers):
     unique, counts = np.unique(numbers, return_counts=True)
     plt.bar(unique, counts)
-    plt.xlabel('Valor')
-    plt.ylabel('Contar')
-    plt.title('Barras')
-    plt.show()
+    plt.xlabel('Value')
+    plt.ylabel('Count')
+    plt.title('Bar Chart')
+    st.pyplot()
 
 def main():
+    st.title('Simple Stats Tool')
+
+    numbers_input = st.text_area("Enter numbers separated by spaces or commas")
+
     numbers = []
-    while True:
-        num = input("Enter a number (or type 'done' to finish): ")
-        if num.lower() == 'done':
-            break
+    for num in numbers_input.split():
         try:
             numbers.append(float(num))
         except ValueError:
-            print("Please enter a valid number.")
+            pass
 
     if numbers:
         mean, median = calculate_stats(numbers)
-        print(f"Mean: {mean}")
-        print(f"Median: {median}")
+        st.write(f"Mean: {mean}")
+        st.write(f"Median: {median}")
         
         plot_histogram(numbers)
         plot_bar_chart(numbers)
