@@ -7,12 +7,14 @@ def calculate_stats(numbers):
     mean = np.round(np.mean(numbers),3)
     median = np.median(numbers)
     std = np.round(np.std(numbers,ddof=1),3)
+    variance = np.round(np.var(numbers),3)
     minim = np.min(numbers)
     q1 = np.quantile(numbers, 0.25)
     q3 = np.quantile(numbers, 0.75)
     maxim = np.max(numbers)
+    intq= q3 - q1
 
-    return mean, median, std, q1, q3, minim, maxim
+    return mean, median, std, q1, q3, minim, maxim, variance, intq
 
 def parse_input(numbers_input):
     # Split input by comma, space, or newline
@@ -36,26 +38,28 @@ def main():
         numbers = parse_input(numbers_input)
 
         if numbers:
-            mean, std, minim, q1, median, q3, maxim = calculate_stats(numbers)
+            mean, std, minim, q1, median, q3, maxim, variance, intq = calculate_stats(numbers)
             st.write(f"Media: {mean}")
+            st.write(f"Varianza: {variance}")
             st.write(f"Desvio Estandar Muestral: {std}")
-            st.write("**Cinco números de resumen**")
+            st.write("#### Cinco números de resumen")
             st.write(f"Mínimo: {minim}")
             st.write(f"1 Cuartil: {q1}")
             st.write(f"Mediana: {median}")
             st.write(f"3 Cuartil: {q3}")
             st.write(f"Máximo: {maxim}")
+            st.write(f"Intervalo intercuartil: {intq}")
 
-            st.write("### Histogram")
-            hist_data = pd.DataFrame({'Numbers': numbers})
-            fig = px.histogram(hist_data, x='Numbers', nbins=len(set(numbers)))
-            fig.add_vline(x=mean, line_dash="dash", line_color="red", name="Mean")
-            fig.add_vline(x=median, line_dash="dash", line_color="green", name="Median")
+            st.write("### Histograma")
+            hist_data = pd.DataFrame({'Numeros': numbers})
+            fig = px.histogram(hist_data, x='Numeros', nbins=len(set(numbers)))
+            fig.add_vline(x=mean, line_dash="dash", line_color="red", name="Media")
+            fig.add_vline(x=median, line_dash="dash", line_color="green", name="Mediana")
             st.plotly_chart(fig)
 
             st.write("### Box Plot")
-            box_data = pd.DataFrame({'Numbers': numbers})
-            fig = px.box(box_data, y='Numbers')
+            box_data = pd.DataFrame({'Numeros': numbers})
+            fig = px.box(box_data, y='Numeros')
             st.plotly_chart(fig)
 
     st.text ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
