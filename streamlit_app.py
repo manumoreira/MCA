@@ -6,11 +6,11 @@ import pandas as pd
 def calculate_stats(numbers):
     mean = np.round(np.mean(numbers),3)
     median = np.median(numbers)
-    std = np.round(np.std(numbers,ddof=1),3)
+    std = np.std(numbers, ddof=1)
     variance = np.round(np.var(numbers),3)
     minim = np.min(numbers)
     q1 = np.quantile(numbers, 0.25)
-    q3 = np.quantile(numbers, 0.75)
+    q3 = np.quantile(numbers, 0.70)
     maxim = np.max(numbers)
     intq= q3 - q1
 
@@ -38,7 +38,8 @@ def main():
         numbers = parse_input(numbers_input)
 
         if numbers:
-            mean, std, minim, q1, median, q3, maxim, variance, intq = calculate_stats(numbers)
+            mean, median, std, q1, q3, minim, maxim, variance, intq = calculate_stats(numbers)
+            st.write(numbers)
             st.write(f"Media: {mean}")
             st.write(f"Varianza: {variance}")
             st.write(f"Desvio Estandar Muestral: {std}")
