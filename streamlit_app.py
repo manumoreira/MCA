@@ -39,7 +39,6 @@ def main():
 
         if numbers:
             mean, median, std, q1, q3, minim, maxim, variance, intq = calculate_stats(numbers)
-            st.write(numbers)
             st.write(f"Media: {mean}")
             st.write(f"Varianza: {variance}")
             st.write(f"Desvio Estandar Muestral: {std}")
