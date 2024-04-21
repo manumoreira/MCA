@@ -6,7 +6,7 @@ import pandas as pd
 def calculate_stats(numbers):
     mean = np.round(np.mean(numbers),3)
     median = np.median(numbers)
-    std = np.std(numbers, ddof=1)
+    std = np/round(np.std(numbers, ddof=1),3)
     variance = np.round(np.var(numbers),3)
     minim = np.min(numbers)
     q1 = np.quantile(numbers, 0.25)
