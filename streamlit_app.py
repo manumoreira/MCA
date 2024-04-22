@@ -30,7 +30,7 @@ def parse_input(numbers_input):
 
 def main():
     st.title('MCA U2 - Graficación, frecuencias, medidas de tendencia central y dispersión')
-    st.subheader('Esta app calcula media, mediana, grafica histograma y Box Plot')
+    st.subheader('Esta app calcula media, mediana, grafica histograma y box plot')
 
     numbers_input = st.text_area("Ingrese números separados por coma, espacio o enter")
 
