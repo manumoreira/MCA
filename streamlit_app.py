@@ -55,12 +55,13 @@ def main():
             fig = px.histogram(hist_data, x='Numeros', nbins=len(set(numbers)))
             fig.add_vline(x=mean, line_dash="dash", line_color="red", name="Media")
             fig.add_vline(x=median, line_dash="dash", line_color="green", name="Mediana")
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, use_container_width=True)
+
 
             st.write("### Box Plot")
             box_data = pd.DataFrame({'Numeros': numbers})
             fig = px.box(box_data, y='Numeros')
-            st.plotly_chart(fig)
+            st.plotly_chart(fig, use_container_width=True)
 
     st.text ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
 
