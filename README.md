@@ -10,7 +10,9 @@ Este repositorio contiene pequeñas app para ser utizadas en la cursada de Méto
 La app de U2 permite calcular las medidas de tendencia central y dispersión
 - Media
 - Mediana
-- varianza
+- Varianza
 - Desvio estandar
 - Cuartiles
-También ofrece hostogramas y box-plots
+
+  
+También ofrece histogramas y box-plots
