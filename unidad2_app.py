@@ -10,7 +10,7 @@ def calculate_stats(numbers):
     variance = np.round(np.var(numbers),3)
     minim = np.min(numbers)
     q1 = np.quantile(numbers, 0.25)
-    q3 = np.quantile(numbers, 0.70)
+    q3 = np.quantile(numbers, 0.75)
     maxim = np.max(numbers)
     intq= q3 - q1
 
