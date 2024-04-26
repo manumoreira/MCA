@@ -20,3 +20,4 @@ for i in range(0,10000):
 plt.subplot(1, 2, 2)
 norm = sns.histplot(b)
 plt.title('Normal distribution')
+
