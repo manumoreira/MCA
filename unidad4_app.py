@@ -56,8 +56,7 @@ def main():
         fig3 = px.histogram(b)
         st.plotly_chart(fig3, use_container_width=True)
 
-
-st.text ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
+    st.text ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
 
 if __name__ == "__main__":
     
