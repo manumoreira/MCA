@@ -8,8 +8,9 @@ import plotly_express as px
 def main():
     st.title('MCA U4 - Teorema central del límite')
     st.subheader('Esta app permite una aproximación conceptual al TCL')
+    st.write('Al sumarse repetidas veces muchas distribuciones van a tender a una distribución normal')
 
-    st.write ('Primero generamos una distribución uniforme de números entre 0 y 10 que llamaremo du (Disrtibución Uniforme)')
+    st.write ('Primero generamos una distribución uniforme de números entre 0 y 10 que llamaremo du (Distribución Uniforme)')
 
     if st.button("Generar du"):
 
@@ -55,7 +56,8 @@ def main():
         fig3 = px.histogram(b)
         st.plotly_chart(fig3, use_container_width=True)
 
-st.write ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
+
+st.text ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
 
 if __name__ == "__main__":
     
