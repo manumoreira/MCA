@@ -2,22 +2,61 @@
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+import streamlit as st
+import plotly_express as px
 
-## De distribuciones uniformes a distribuciones normales
-# Distribucion uniforme
-a = np.random.uniform(0, 10, 10000)
-plt.figure(figsize=(10, 5))
-plt.subplot(1, 2, 1)
-unifo = sns.histplot(a)
-plt.title('Uniform Distribution')
+def main():
+    st.title('MCA U4 - Teorema central del límite')
+    st.subheader('Esta app permite una aproximación conceptual al TCL')
+
+    st.write ('Primero generamos una distribución uniforme de números entre 0 y 10 que llamaremo du (Disrtibución Uniforme)')
+
+    if st.button("Generar du"):
+
+        ## De distribuciones uniformes a distribuciones normales
+        # Distribucion uniforme
+        st.write("### Histograma Distribución Uniforme")
+        a = np.random.uniform(0, 10, 10000)
+        fig1 = px.histogram(a)
+        st.plotly_chart(fig1, use_container_width=True)
+        
+        
+        #plt.figure(figsize=(10, 5))
+        #plt.subplot(1, 2, 1)
+        #unifo = sns.histplot(a)
+        #plt.title('Distribución Uniforme')
+
+    st.text ('Luego sumaremos esa distribución a si misma du + du')
+    
+    if st.button("Generar du+du"):
+
+        for i in range(0,10000):
+            b = np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
+
+        st.write("### Histograma du + du")
+        fig2 = px.histogram(b)
+        st.plotly_chart(fig2, use_container_width=True)
+        
+    st.text ('Por ultimo haremos varias sumas de du (du*6)')
+    
+    if st.button("Generar du*6"):
+
+        for i in range(0,10000):
+            b = np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
+            b = b + np.random.uniform(0, 10, 10000)
 
 
-# Distribución tipo normal
-for i in range(0,10000):
-    b = np.random.uniform(0, 10, 10000)
-    b = b + np.random.uniform(0, 10, 10000)
+        st.write("### Histograma du*6")
+        fig3 = px.histogram(b)
+        st.plotly_chart(fig3, use_container_width=True)
 
-plt.subplot(1, 2, 2)
-norm = sns.histplot(b)
-plt.title('Normal distribution')
+st.write ('Creado para la cátedra Métodos Cuantitativos en Antropología 2024')
 
+if __name__ == "__main__":
+    
+    main()
