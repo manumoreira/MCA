@@ -20,23 +20,32 @@ def main():
     with data_input[3]:
         sample_size = st.number_input("Tamaño muestra")    
     with data_input[4]:
-        alpha_val = st.selectbox("Alfa",(0.1, 0.5)) 
+        alpha_val = st.selectbox("Alfa",(0.01, 0.05)) 
 
     if st.button("lalala"):
-        z_val = (mean_sam - mean_pob) / (stdev_pob/(np.sqrt(sample_size)))
-        test_stat = 1 - (sci.stats.norm.cdf(z_val))
-        if (test_stat > alpha_val):
+        z_value = (mean_sam - mean_pob) / (stdev_pob/(np.sqrt(sample_size)))
+        p_value = 1 - sci.stats.norm.cdf(z_value)
+        if (p_value > alpha_val):
             "No es estadísiticamente significativo"
-            print(z_val)
-            print(test_stat)
+            print("Soy z", z_value)
+            print("Soy p", p_value)
+            print("Soy alfa", alpha_val)
         else:
             "Esa Cabeza!"
-            x_axis = np.arange(-3, 3, 0.001) 
-            print(test_stat)
-            mean = statistics.mean(x_axis) 
-            sd = statistics.stdev(x_axis) 
-            plt.plot(x_axis, norm.pdf(x_axis, mean, sd)) 
-            plt.show() 
+            x_axis = np.arange(-4, 4, 0.0001) 
+            print("Soy z", z_value)
+            print("Soy p", p_value)
+            print("Soy alfa", alpha_val)
+            gaussian = sci.stats.norm.pdf(x_axis, 0, 1)
+            #gaussian = pyplot.plot(x_axis, sci.stats.norm.pdf(x_axis, mean, sd)) 
+            fig, ax = plt.subplots()
+            ax.plot(x_axis, gaussian, label="Distribución Gaussiana")
+            ax.plot(z_value, sci.stats.norm.pdf(z_value, 0, 1), 'ro')  # 'ro' means red color, circle marker
+            ax.annotate(f'p-value = {p_value}', xy=(z_value, sci.stats.norm.pdf(z_value, 0, 1)),
+                xytext=(p_value + 0.5, sci.stats.norm.pdf(p_value, 0, 1) + 0.000005),
+                arrowprops=dict(facecolor='black', arrowstyle='->'))
+            ax.set_xlim(-4, 4)
+            st.pyplot(fig)
 
 
     #if st.button("Generar du+du"):
