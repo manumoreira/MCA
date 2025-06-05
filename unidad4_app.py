@@ -10,6 +10,8 @@ def main():
     st.subheader('Esta app permite una aproximación conceptual al TCL')
     st.write('Al sumarse repetidas veces muchas distribuciones van a tender a una distribución normal')
 
+    st.write('Esta app está inspirada en esta pseudo-demostración intuitiva de Nassim Taleb https://youtu.be/bfM9efdStN8?si=TCVAD1uxm8rjzCep')
+
     st.write ('Primero generamos una distribución uniforme de números entre 0 y 10 que llamaremo du (Distribución Uniforme)')
 
     if st.button("Generar du"):
