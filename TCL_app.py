@@ -8,7 +8,7 @@ import seaborn as sns
 
 # Configuración de la página
 st.set_page_config(
-    page_title="Teorema del Límite Central",
+    page_title="Teorema Central del Límite",
     page_icon="📊",
     layout="wide"
 )
@@ -18,32 +18,35 @@ plt.style.use('seaborn-v0_8')
 sns.set_palette("husl")
 
 def main():
-    st.title("📊 Teorema del Límite Central: Dos Perspectivas")
+    st.title("📊 Teorema Central del Límite: Aproximación intuitiva e interactiva")
     st.markdown("---")
     
     # Crear pestañas
     tab1, tab2, tab3 = st.tabs([
-        "🎲 Método 1: Enfoque de Taleb (Suma de Distribuciones)",
-        "📈 Método 2: Muestreo Real (Medias Muestrales)", 
-        "🤔 Comparación y Explicación"
+        "🎲 Método 1: Muestreo Real (Medias Muestrales)",
+        "📈 Método 2: Enfoque de Taleb (Suma de Distribuciones)", 
+        "🤔 Reflexión y Explicación"
     ])
     
     with tab1:
-        taleb_method()
+        sampling_method()
     
     with tab2:
-        sampling_method()
+        taleb_method()
     
     with tab3:
         comparison_explanation()
 
+    st.text ('Creado para la cátedra Métodos Cuantitativos en Arqueología 2025')
+
 def taleb_method():
-    st.header("🎲 Método 1: Enfoque de Taleb (Suma de Distribuciones)")
+    st.header("🎲 Método 2: Enfoque de Taleb (Suma)")
     
     st.markdown("""
     **¿Qué estamos haciendo aquí?**
     Comenzamos con una distribución uniforme (plana, probabilidad igual en todas partes). 
     Cada vez que sumamos otra distribución uniforme a sí misma, el resultado se vuelve más "acampanado".
+    Esta idea está inspirada en el mooc sobre probabilidad de Nassim Taleb https://youtu.be/bfM9efdStN8?si=TCVAD1uxm8rjzCep
     """)
     
     # Controles
@@ -109,7 +112,7 @@ def taleb_method():
     """)
 
 def sampling_method():
-    st.header("📈 Método 2: Muestreo Real (Medias Muestrales)")
+    st.header("📈 Método 1: Muestreo Real (Medias Muestrales)")
     
     st.markdown("""
     **¿Qué estamos haciendo aquí?**
@@ -130,10 +133,10 @@ def sampling_method():
         
         n_muestras = st.slider(
             "Número de muestras a tomar:",
-            min_value=50,
-            max_value=1000,
-            value=200,
-            step=50
+            min_value=10,
+            max_value=300,
+            value=100,
+            step=10
         )
     
     with col2:
@@ -217,7 +220,7 @@ def sampling_method():
         
         # Explicación de resultados
         st.success(f"""
-        **🎯 ¡Excelente!** Con {st.session_state.n_muestras} muestras de tamaño {st.session_state.tamaño_muestra}:
+        **🎯 Veamos qué pasó** con {st.session_state.n_muestras} muestras de tamaño {st.session_state.tamaño_muestra}:
         
         - El promedio de las medias muestrales ({promedio_medias:.3f}) está muy cerca de la media poblacional (5.5)
         - El error estándar real ({error_estandar_real:.3f}) coincide con el teórico ({error_estandar_teorico:.3f})
@@ -225,60 +228,29 @@ def sampling_method():
         """)
 
 def comparison_explanation():
-    st.header("🤔 ¿Cómo se relacionan estos métodos?")
+    st.header("🤔 ¿Qué vemos en estas simulaciones?")
     
     col1, col2 = st.columns(2)
     
     with col1:
-        st.subheader("🎲 Enfoque de Taleb")
+        st.subheader("🎲 ¿Cómo se comporta el promedio de las medias?")
         st.markdown("""
-        **¿Qué muestra?**
-        - El principio matemático fundamental
-        - Cuando sumas variables aleatorias independientes
-        - El resultado tiende hacia distribución normal
-        - Es una demostración teórica elegante
-        
-        **Fortalezas:**
-        - Visualmente impactante
-        - Muestra el concepto matemático puro
-        - Fácil de entender intuitivamente
+        - Es relativamente estable con distribuciones poblacionales uniformes
+        - Es levemente sensible al tamaño de la muestra
+        - Es levemente sensible a la cantidad de muestras
         """)
     
     with col2:
-        st.subheader("📈 Muestreo Real")
+        st.subheader("📈 Qué pasa con el error?")
         st.markdown("""
-        **¿Qué muestra?**
-        - El Teorema del Límite Central en la práctica
-        - Cómo funciona con datos reales
-        - Por qué las medias muestrales son confiables
-        - La base de la inferencia estadística
-        
-        **Fortalezas:**
-        - Aplicación práctica directa
-        - Relevante para investigación
-        - Muestra la variabilidad real
+        - Es muy sensible al tamaño de las muestras
+        - Tiene baja sensibilidad a la cantidad de muestras después de cierto umbral (> 10)
+        - El error teórico se acerca al real con tamaños de muestras > 30  
         """)
     
     st.markdown("---")
     
-    st.subheader("🔗 La Conexión Clave")
-    
-    st.info("""
-    **¿Cómo se conectan?**
-    
-    Una media muestral es esencialmente: **(X₁ + X₂ + ... + Xₙ) ÷ n**
-    
-    - La parte de **suma** (X₁ + X₂ + ... + Xₙ) sigue el principio de Taleb
-    - **Dividir por n** solo cambia la escala, no la forma de la distribución
-    - Por eso ambos métodos muestran normalidad
-    
-    **En términos simples:**
-    - Taleb muestra el "por qué" matemático
-    - El muestreo real muestra el "cómo" práctico
-    - Ambos son la misma matemática, aplicada de forma diferente
-    """)
-    
-    st.subheader("🎯 Implicaciones para Ciencias Sociales")
+    st.subheader("🎯 Implicaciones para en la práctica")
     
     col1, col2 = st.columns(2)
     
@@ -304,7 +276,7 @@ def comparison_explanation():
     
     st.subheader("🧠 Ejercicio de Reflexión")
     
-    with st.expander("💭 Preguntas para discutir con estudiantes"):
+    with st.expander("💭 Preguntas para discutir en clase"):
         st.markdown("""
         1. **¿Qué pasaría si tomáramos muestras de tamaño 1?** 
            - Pista: La distribución sería igual a la población original
@@ -312,14 +284,9 @@ def comparison_explanation():
         2. **¿Por qué las medias muestrales varían menos que los datos individuales?**
            - Pista: Piensa en el efecto de promediar valores extremos
         
-        3. **¿Qué significa esto para las encuestas y estudios sociales?**
-           - Pista: ¿Por qué podemos confiar en resultados de muestras?
-        
-        4. **¿Funcionaría esto con cualquier distribución poblacional?**
+        3. **¿Funcionaría esto con cualquier distribución poblacional?**
            - Pista: ¡Sí! Prueba cambiando la distribución original
         
-        5. **¿Cuál es la diferencia práctica entre los dos enfoques?**
-           - Pista: Uno es teórico, otro simula investigación real
         """)
 
 if __name__ == "__main__":
