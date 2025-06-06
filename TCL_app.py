@@ -24,7 +24,7 @@ def main():
     # Crear pestañas
     tab1, tab2, tab3 = st.tabs([
         "🎲 Método 1: Muestreo Real (Medias Muestrales)",
-        "📈 Método 2: Enfoque de Taleb (Suma de Distribuciones)", 
+        "📈 Método 2: Enfoque de Taleb", 
         "🤔 Reflexión y Explicación"
     ])
     
@@ -40,7 +40,7 @@ def main():
     st.text ('Creado para la cátedra Métodos Cuantitativos en Arqueología 2025')
 
 def taleb_method():
-    st.header("🎲 Método 2: Enfoque de Taleb (Suma)")
+    st.header("🎲 Método 2: Enfoque de Taleb (Suma de Distribuciones)")
     
     st.markdown("""
     **¿Qué estamos haciendo aquí?**
