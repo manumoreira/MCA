@@ -17,7 +17,7 @@ La app de U2 permite calcular las medidas de tendencia central y dispersión
   
 También ofrece histogramas y box-plots
 
-## Unnidad 4 
+## Unidad 4 
 
 Es una breve pseudo-demostración intuitiva del TCL.
 
